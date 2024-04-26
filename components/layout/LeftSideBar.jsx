@@ -1,12 +1,11 @@
 "use client";
-import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
+import { SignOutButton, UserButton, useUser, SignedIn } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import Image from "next/image";
 import Link from "next/link";
 import Menu from "./Menu";
 import { useEffect, useState } from "react";
 import Loader from "../Loader";
-import { SignedIn } from "@clerk/nextjs/dist/types/components.server";
 import { Logout } from "@mui/icons-material";
 
 export default function LeftSideBar() {
