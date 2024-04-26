@@ -1,11 +1,13 @@
 "use client";
-import { UserButton, useUser } from "@clerk/nextjs";
+import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import Image from "next/image";
 import Link from "next/link";
 import Menu from "./Menu";
 import { useEffect, useState } from "react";
 import Loader from "../Loader";
+import { SignedIn } from "@clerk/nextjs/dist/types/components.server";
+import { Logout } from "@mui/icons-material";
 
 export default function LeftSideBar() {
   const { user, isLoaded } = useUser();
@@ -80,6 +82,15 @@ export default function LeftSideBar() {
         />
         <p className="text-light-1 text-body-bold">Manage Account</p>
       </div>
+
+      <SignedIn>
+        <SignOutButton>
+          <div className="flex cursor-pointer gap-4 items-center">
+            <Logout sx={{color: "white", fontSize: "32px"}} />
+            <p className="text-body-bold text-left-1">Log Out</p>
+          </div>
+        </SignOutButton>
+      </SignedIn>
     </div>
   );
 }
