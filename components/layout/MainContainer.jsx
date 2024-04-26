@@ -1,6 +1,6 @@
 "use client";
 import TopBar from "./TopBar";
-import { pageTitles } from "@/constants";
+import { pageTitles } from "../../constants/index";
 import { usePathname } from "next/navigation";
 
 export default function MainContainer({ children }) {
