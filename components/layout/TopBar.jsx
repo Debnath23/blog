@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { UserButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { dark } from "@clerk/themes";
-import Loader from "@/components/Loader";
+import Loader from "../Loader";
 
 export default function TopBar() {
   const { user, isLoaded } = useUser();
