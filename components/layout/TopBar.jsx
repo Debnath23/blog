@@ -15,24 +15,25 @@ export default function TopBar() {
 
   const router = useRouter();
 
-  const getUser = async () => {
-    const response = await fetch(`/api/user/${user.id}`);
-    const data = await response.json();
-    if (data) {
-      setUserData(data);
-      setloading(false);
-    }
-  };
+  // const getUser = async () => {
+  //   const response = await fetch(`/api/user/${user.id}`);
+  //   const data = await response.json();
+  //   if (data) {
+  //     setUserData(data);
+  //     setloading(false);
+  //   }
+  // };
 
-  useEffect(() => {
-    if (user) {
-      getUser();
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     getUser();
+  //   }
+  // }, [user]);
 
-  return loading || !isLoaded ? (
-    <Loader />
-  ) : (
+  // return loading || !isLoaded ? (
+  //   <Loader />
+  // ) :  
+  return (
     <div className="flex justify-between items-center mt-6">
       <div className="relative">
         <input
@@ -62,7 +63,7 @@ export default function TopBar() {
 
         <UserButton
           appearance={{ baseTheme: dark }}
-          afterSignOutUrl="/sign-in"
+          forceRedirectUrl="/sign-in"
         />
       </div>
     </div>

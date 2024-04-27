@@ -1,7 +1,6 @@
 import { Webhook } from "svix";
 import { headers } from "next/headers";
-import { WebhookEvent } from "@clerk/nextjs/server";
-import {createOrUpdateUser, deleteUser} from "../../../lib/actions/user.js"
+import { createOrUpdateUser, deleteUser } from "@lib/actions/user";
 
 export async function POST(req) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
@@ -21,7 +20,7 @@ export async function POST(req) {
 
   // If there are no headers, error out
   if (!svix_id || !svix_timestamp || !svix_signature) {
-    return new Response("Error occurred -- no svix headers", {
+    return new Response("Error occured -- no svix headers", {
       status: 400,
     });
   }
@@ -49,6 +48,7 @@ export async function POST(req) {
     });
   }
 
+  // Handle the event
   const eventType = evt?.type;
 
   if (eventType === "user.created" || eventType === "user.updated") {
@@ -68,28 +68,27 @@ export async function POST(req) {
       return new Response("User is created or updated", {
         status: 200,
       });
-    } catch (error) {
-      console.error("Error creating or updating user: ", error);
+    } catch (err) {
+      console.error("Error creating or updating user:", err);
       return new Response("Error occured", {
         status: 500,
       });
     }
   }
 
-  if(eventType === "user.deleted"){
+  if (eventType === "user.deleted") {
     try {
-      const {id} = evt?.data
-      await deleteUser(id)
+      const { id } = evt?.data;
+      await deleteUser(id);
 
       return new Response("User is deleted", {
-        status: 200
-      }
-      )
-    } catch (error) {
-      console.error("Error deleting user: ",error);
+        status: 200,
+      });
+    } catch (err) {
+      console.error("Error deleting user:", err);
       return new Response("Error occured", {
-        status: 500
-      })
+        status: 500,
+      });
     }
   }
 }
